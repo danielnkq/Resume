@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bootstrap Login Form Template</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="assets/css/form-elements.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="assets/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+
+    </head>
+
+    <body>
+                  <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 social-login">
+                        	<h3>login with:</h3>
+                        	<div class="social-login-buttons">
+	                        	<a class="btn btn-link-2" href="#" onclick="signIn2();">
+	                        		<i class="fa fa-facebook"></i> Facebook
+	                        	</a>
+	                        	<a href="#" class="btn btn-link-2"  onclick="signIn3();">
+	                        		<i class="fa fa-twitter"></i> Twitter
+	                        	</a>
+	                        	<a class="btn btn-link-2" href="#" onclick="signIn();">
+	                        		<i class="fa fa-google"></i> Google 
+	                        	</a>
+                        	</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+
+        <!-- Javascript -->
+        <script src="assets/js/jquery-1.11.1.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.backstretch.min.js"></script>
+        <script src="assets/js/scripts.js"></script>
+        
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+            <script>
+              // Initialize Firebase
+              var config = {
+                apiKey: "AIzaSyD4sBGw8s_VKkGf4wQAwV4YvZSwF5ZOGLU",
+                authDomain: "resume-authentication.firebaseapp.com",
+                databaseURL: "https://resume-authentication.firebaseio.com",
+                projectId: "resume-authentication",
+                storageBucket: "",
+                messagingSenderId: "732347243292"
+              };
+              firebase.initializeApp(config);
+
+
+              </script>
+                        <script>
+                    var provider = new firebase.auth.GoogleAuthProvider();
+                    function signIn() {
+                        firebase.auth().signInWithPopup(provider).then(function(result) {
+                        // This gives you a Google Access Token. You can use it to access the Google API.
+                        var token = result.credential.accessToken;
+                        // The signed-in user info.
+                        user = result.user;
+                        alert(JSON.stringify(user));
+                        // $("#bnlah").html();
+                        //   window.user = user;
+                        showWelcomeContainer();
+                        // ...
+                        }).catch(function(error) {
+                        // Handle Errors here.
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        // The email of the user's account used.
+                        var email = error.email;
+                        $("#bnlah").html(JSON.stringify(error));
+                        // The firebase.auth.AuthCredential type that was used.
+                        var credential = error.credential;
+                        // ...
+                        });
+                    }
+                </script>
+
+
+                <!-- facebook -->
+                <!--https://pause-fb19e.firebaseapp.com/__/auth/handler-->
+                <script>
+                  var provider2 = new firebase.auth.FacebookAuthProvider();
+                  //firebase.auth().signInWithRedirect(provider2);
+                  function signIn2(){
+                        firebase.auth().signInWithPopup(provider2).then(function(result) {
+                        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+                        var token = result.credential.accessToken;
+                        // The signed-in user info.
+                        var user = result.user;
+                        // ...
+                      }).catch(function(error) {
+                        // Handle Errors here.
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        // The email of the user's account used.
+                        var email = error.email;
+                        // The firebase.auth.AuthCredential type that was used.
+                        var credential = error.credential;
+                        // ...
+                      });
+                  }
+                </script>
+
+
+                <script>
+                  var provide3 = new firebase.auth.TwitterAuthProvider();
+                  function signIn3(){
+                      firebase.auth().signInWithPopup(provide3).then(function(result) {
+                      // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
+                      // You can use these server side with your app's credentials to access the Twitter API.
+                      var token = result.credential.accessToken;
+                      var secret = result.credential.secret;
+                      // The signed-in user info.
+                      var user = result.user;
+                      // ...
+                    }).catch(function(error) {
+                      // Handle Errors here.
+                      var errorCode = error.code;
+                      var errorMessage = error.message;
+                      // The email of the user's account used.
+                      var email = error.email;
+                      // The firebase.auth.AuthCredential type that was used.
+                      var credential = error.credential;
+                      // ...
+                    });
+                  }
+                </script>
+                <script>
+                  //Handle Account Status
+                  firebase.auth().onAuthStateChanged(user => {
+                  if(user) {
+                    window.location = 'home.html'; //After successful login, user will be redirected to home.html
+                  }
+                });
+                  </script>
+
+                  <script>
+                  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+  .then(function() {
+    // Existing and future Auth states are now persisted in the current
+    // session only. Closing the window would clear any existing state even
+    // if a user forgets to sign out.
+    // ...
+    // New sign-in will be persisted with session persistence.
+    return firebase.auth().signInWithEmailAndPassword(email, password);
+  })
+  .catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+  });
+        </script>      
+    </body>
+
+</html>
